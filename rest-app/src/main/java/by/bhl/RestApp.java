@@ -21,4 +21,5 @@ public class RestApp
             repository.save(new PersonalComputer("Lenovo M700", 17, (byte) 1));
         };
     }
+
 }

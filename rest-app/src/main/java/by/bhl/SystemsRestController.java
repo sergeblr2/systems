@@ -23,24 +23,34 @@ public class SystemsRestController {
         return repository.findById(id);
     }
 
-/*    @PostMapping
+    @GetMapping("/name")
+    public List<PersonalComputer> findByNameContains(@RequestParam String value) {
+        return repository.findByNameContains(value);
+    }
+
+    @PostMapping
     public String addPersonalComputer(@RequestBody PersonalComputer personalComputer) {
-        // save
-        System.out.println("PC saved: " + personalComputer.toString());
+        System.out.println("Saving pc: " + personalComputer.toString());
+        repository.save(personalComputer);
         return "Object saved: " + personalComputer.toString();
     }
 
     @DeleteMapping
     public void deletePersonalComputer(@RequestParam Long id) {
-        // delete id
-        System.out.println("PC with id " + id + " deleted");
-
+        System.out.println("Deleting pc with id " + id);
+        repository.deleteById(id);
     }
 
     @PutMapping
     public String updatePersonalComputer(@RequestBody PersonalComputer personalComputer) {
-        System.out.println("PC updated: " + personalComputer.toString());
+        System.out.println("Updating pc: " + personalComputer.toString());
+        if(repository.findById(personalComputer.getId()).isPresent()) {
+            repository.save(personalComputer);
+        } else {
+            System.out.println("next pc is not found in db for update: " + personalComputer.toString());
+        }
+
         return "Object updated: " + personalComputer.toString();
-    }*/
+    }
 
 }
