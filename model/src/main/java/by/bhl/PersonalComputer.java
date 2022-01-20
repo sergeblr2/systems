@@ -1,6 +1,8 @@
 package by.bhl;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class PersonalComputer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String name;
     Integer level;
