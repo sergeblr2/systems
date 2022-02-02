@@ -35,6 +35,7 @@ public class SystemsRestController {
         return "Object saved: " + personalComputer.toString();
     }
 
+    // Try VOID in DELETE method (see that no any string returns)
     @DeleteMapping
     public void deletePersonalComputer(@RequestParam Long id) {
         System.out.println("Deleting pc with id " + id);

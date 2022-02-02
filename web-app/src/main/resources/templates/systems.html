@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Available systems</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<table class="table table-striped text-left">
+    <thead class="thead-light">
+    <tr class="text-left">
+        <th width="5%">ID</th>
+        <th width="50%">System name</th>
+        <th width="20%" class="text-right" nowrap>Level</th>
+        <th width="25%">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pcomp : ${personalComputers}">
+        <td th:text="${pcomp.id}">PC ID</td>
+        <td th:text="${pcomp.name}">PC Name</td>
+        <td th:text="${pcomp.level}">PC Level</td>
+        <td th:text="${pcomp.status}">PC Status</td>
+        </span>
+        <td class="text-right" nowrap>
+            <div class="d-none d-sm-block">Edit</div>
+            <div class="text-white d-none d-sm-block">Delete</div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
