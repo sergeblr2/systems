@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="headerMenu :: header (pagename='Add System')">header</div>
+<head>
+    <meta charset="UTF-8">
+    <title>Available systems - Add PC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/css/bootstrap.css}">
+</head>
+
+<section id="pc">
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="max-width: 850px;">
+                    <div class="card-body">
+                        <form id="pcForm"
+                              th:object="${personalComputer}"
+                              th:action="@{/system}"
+                              th:method="@{post}">
+                            <input id="field_pcId"
+                                   type="hidden"
+                                   th:field="*{id}"/>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_pcName">PC name:</label>
+                                <input class="form-control" pattern="[A-Za-z0-9]"
+                                       id="field_pcName"
+                                       type="text" value=""
+                                       th:class="form-control"
+                                       th:field="*{name}"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_pcLevel">PC level:</label>
+                                <input id="field_pcLevel" type="text"
+                                       class="currency form-control"
+                                       th:class="form-control"
+                                       th:field="*{level}"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_pcStatus">Status:</label>
+                                <input id="field_pcStatus" type="text"
+                                       class="currency form-control"
+                                       th:class="form-control"
+                                       th:field="*{status}"/>
+                            </div>
+                        </form>
+                        <div>
+                            <a href="items.html" class="btn btn-info"
+                               th:onclick="@{document.forms['pcForm'].submit(); return false;}">Create new PC</a>
+                            <a th:href="@{/systems}" href="systems.html" class="btn btn-warning">Cancel</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

@@ -29,10 +29,10 @@ public class SystemsRestController {
     }
 
     @PostMapping
-    public String addPersonalComputer(@RequestBody PersonalComputer personalComputer) {
+    public void addPersonalComputer(@RequestBody PersonalComputer personalComputer) {
         System.out.println("Saving pc: " + personalComputer.toString());
         repository.save(personalComputer);
-        return "Object saved: " + personalComputer.toString();
+        //return "Object saved: " + personalComputer.toString();
     }
 
     // Try VOID in DELETE method (see that no any string returns)
@@ -43,7 +43,7 @@ public class SystemsRestController {
     }
 
     @PutMapping
-    public String updatePersonalComputer(@RequestBody PersonalComputer personalComputer) {
+    public void updatePersonalComputer(@RequestBody PersonalComputer personalComputer) {
         System.out.println("Updating pc: " + personalComputer.toString());
         if(repository.findById(personalComputer.getId()).isPresent()) {
             repository.save(personalComputer);
@@ -51,7 +51,7 @@ public class SystemsRestController {
             System.out.println("next pc is not found in db for update: " + personalComputer.toString());
         }
 
-        return "Object updated: " + personalComputer.toString();
+        //return "Object updated: " + personalComputer.toString();
     }
 
 }

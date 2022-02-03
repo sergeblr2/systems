@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="headerMenu">
+    <head>
+        <meta charset="UTF-8">
+        <title>Available systems - Add PC</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+              href="../../resources/static/css/bootstrap.css"
+              th:href="@{/css/bootstrap.css}">
+    </head>
+    <body>
+
+    <header class="sticky-top" >
+        <nav class="sticky-top p-1 navbar navbar-expand text-white rounded bg-dark">
+            <a class="navbar-brand h2">
+                Systems
+            </a>
+            <div class="collapse navbar-collapse">
+                <button class="btn btn-primary text-white" type="button" th:onclick="'window.location.href=\''+@{/systems}+'\''">All Systems</button>&nbsp;
+                <button class="btn btn-success text-white" type="button" th:onclick="'window.location.href=\''+@{/system}+'\''">Add System</button>&nbsp;
+            </div>
+        </nav>
+    </header>
+</div>
+</body>
+</html>

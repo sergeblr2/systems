@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:replace="headerMenu :: header (pagename='All Systems')">header</div>
 <head>
     <meta charset="UTF-8">
     <title>Available systems</title>
@@ -13,7 +14,7 @@
           th:href="@{/css/bootstrap.css}">
 </head>
 <body>
-<table class="table table-striped text-left">
+<table class="table table-responsive text-left">
     <thead class="thead-light">
     <tr class="text-left">
         <th width="5%">ID</th>
