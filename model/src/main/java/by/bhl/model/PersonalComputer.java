@@ -1,4 +1,4 @@
-package by.bhl;
+package by.bhl.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +25,6 @@ public class PersonalComputer {
     }
 
     public PersonalComputer(String name, Integer level, Byte status) {
-        this.id = Math.abs(ThreadLocalRandom.current().nextLong());
         this.name = name;
         this.level = level;
         this.status = status;

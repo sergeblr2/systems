@@ -17,10 +17,11 @@
 <table class="table table-responsive text-left">
     <thead class="thead-light">
     <tr class="text-left">
-        <th width="5%">ID</th>
-        <th width="50%">System name</th>
-        <th width="20%" class="text-right" nowrap>Level</th>
-        <th width="25%">Status</th>
+        <th width="10%">ID</th>
+        <th width="35%">System name</th>
+        <th width="15%">Level</th>
+        <th width="15%">Status</th>
+        <th width="25%"></th>
     </tr>
     </thead>
     <tbody>
@@ -31,11 +32,65 @@
         <td th:text="${pcomp.status}">PC Status</td>
         </span>
         <td class="text-right" nowrap>
-            <div class="d-none d-sm-block">Edit</div>
-            <div class="text-white d-none d-sm-block">Delete</div>
+            <a th:href="@{|/systems/${pcomp.id}|}" type="button" class="btn btn-secondary btn-sm">Change</a>
+            <a href="#" data-toggle="modal" data-target="#deleteDialog"
+               th:attr="data-id=${pcomp.id}, data-name=${pcomp.name}" type="button" class="btn btn-warning btn-sm">Remove</a>
         </td>
     </tr>
     </tbody>
 </table>
+
+<form id="testForm" th:action="@{/systemstest}" method="post">
+    <input type="text" th:value="${test2}" name="test2"/>
+    <a href="#" th:onclick="@{document.forms['testForm'].submit(); return false;}">POST VAR</a>
+</form>
+<!--<input id="test1" type="text"
+       class="form-control"
+       th:class="form-control"
+       th:field="${test2}"/>
+<a href="systems.html" class="btn btn-info"
+   th:text="${}"
+   th:onclick="@{document.forms['pcForm'].submit(); return false;}">Create new PC</a>-->
+
+<!-- Confirm delete Modal -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete PC</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-warning">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/js/bootstrap.min.js}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Delete this pc  ' + target.data('name') + ' ?')
+        document.getElementById('deleteUrl').href = '/systems/' + target.data('id') + '/delete';
+    })
+</script>
+
 </body>
 </html>

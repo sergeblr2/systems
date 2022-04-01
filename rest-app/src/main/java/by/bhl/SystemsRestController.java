@@ -1,5 +1,7 @@
 package by.bhl;
 
+import by.bhl.model.PersonalComputer;
+import by.bhl.repository.PersonalComputerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

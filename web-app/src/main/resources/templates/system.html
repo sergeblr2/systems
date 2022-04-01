@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <form id="pcForm"
                               th:object="${personalComputer}"
-                              th:action="@{/system}"
+                              th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
                             <input id="field_pcId"
                                    type="hidden"
@@ -52,7 +52,8 @@
                             </div>
                         </form>
                         <div>
-                            <a href="items.html" class="btn btn-info"
+                            <a href="systems.html" class="btn btn-info"
+                               th:text="${}"
                                th:onclick="@{document.forms['pcForm'].submit(); return false;}">Create new PC</a>
                             <a th:href="@{/systems}" href="systems.html" class="btn btn-warning">Cancel</a>
                         </div>
