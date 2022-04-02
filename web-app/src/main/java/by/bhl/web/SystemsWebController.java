@@ -25,7 +25,7 @@ import java.util.Optional;
 public class SystemsWebController {
 
     private RestTemplate restTemplate = new RestTemplate();
-    private static String REST_URL = "http://localhost:8091";
+    private static String REST_URL = "http://localhost:8080/rest";
 
     // Controller for loading page with ALL SYSTEMS
     @GetMapping(value = "/systems")
