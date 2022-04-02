@@ -27,7 +27,6 @@ public class SystemsWebController {
     private RestTemplate restTemplate = new RestTemplate();
     private static String REST_URL = "http://localhost:8080/rest";
 
-
     // Controller for loading page with ALL SYSTEMS
     @GetMapping(value = "/systems")
     public final String listAllPcs(Model model) {
