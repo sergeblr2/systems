@@ -2,6 +2,8 @@ package by.bhl;
 
 import by.bhl.model.PersonalComputer;
 import by.bhl.repository.PersonalComputerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/pcs")
 public class SystemsRestController {
+
+    Logger logger = LoggerFactory.getLogger(SystemsRestController.class);
 
     @Autowired
     PersonalComputerRepository repository;
@@ -32,7 +36,7 @@ public class SystemsRestController {
 
     @PostMapping
     public void addPersonalComputer(@RequestBody PersonalComputer personalComputer) {
-        System.out.println("Saving pc: " + personalComputer.toString());
+        logger.info("Saving pc: " + personalComputer.toString());
         repository.save(personalComputer);
         //return "Object saved: " + personalComputer.toString();
     }
@@ -40,17 +44,17 @@ public class SystemsRestController {
     // Try VOID in DELETE method (see that no any string returns)
     @DeleteMapping
     public void deletePersonalComputer(@RequestParam Long id) {
-        System.out.println("Deleting pc with id " + id);
+        logger.info("Deleting pc with id " + id);
         repository.deleteById(id);
     }
 
     @PutMapping
     public void updatePersonalComputer(@RequestBody PersonalComputer personalComputer) {
-        System.out.println("Updating pc: " + personalComputer.toString());
+        logger.info("Updating pc: " + personalComputer.toString());
         if(repository.findById(personalComputer.getId()).isPresent()) {
             repository.save(personalComputer);
         } else {
-            System.out.println("next pc is not found in db for update: " + personalComputer.toString());
+            logger.warn("next pc is not found in db for update: " + personalComputer.toString());
         }
 
         //return "Object updated: " + personalComputer.toString();

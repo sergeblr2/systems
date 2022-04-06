@@ -5,6 +5,9 @@ import by.bhl.web.ExcelHelper.ExcelHelper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -24,13 +27,17 @@ import java.util.Optional;
 @Controller
 public class SystemsWebController {
 
+    Logger logger = LoggerFactory.getLogger(SystemsWebController.class);
+
     private RestTemplate restTemplate = new RestTemplate();
-    private static String REST_URL = "http://localhost:8080/rest";
+
+    @Value("${rest.url}")
+    private String REST_URL;
 
     // Controller for loading page with ALL SYSTEMS
     @GetMapping(value = "/systems")
     public final String listAllPcs(Model model) {
-        System.out.println("Getting all pcs");
+        logger.info("Getting all pcs");
         model.addAttribute("personalComputers",
                 restTemplate.getForObject(REST_URL + "/pcs", List.class));
         //model.addAttribute("test2", "j");
@@ -40,7 +47,7 @@ public class SystemsWebController {
     // Controller for loading page to ADD PC
     @GetMapping(value = "/system")
     public final String gotoAddPCPage(Model model) {
-        System.out.println("Loading PC adding page");
+        logger.info("Loading PC adding page");
         PersonalComputer personalComputer = new PersonalComputer();
         model.addAttribute("personalComputer", personalComputer);
         return "system";
@@ -49,7 +56,7 @@ public class SystemsWebController {
     // Controller for calling REST when "ADD PC" button clicked
     @PostMapping(value = "/system")
     public final String addSystem(PersonalComputer personalComputer) {
-        System.out.println("Adding pc: " + personalComputer.toString());
+        logger.info("Adding pc: " + personalComputer.toString());
         restTemplate.postForEntity(REST_URL + "/pcs", personalComputer, PersonalComputer.class);
         return "redirect:/systems";
     }
@@ -57,7 +64,7 @@ public class SystemsWebController {
     // Controller for loading page to EDIT SYSTEM
     @GetMapping(value = "/systems/{id}")
     public final String gotoEditPCPage(@PathVariable Integer id, Model model) {
-        System.out.println("Loading PC editing page");
+        logger.info("Loading PC editing page");
         PersonalComputer personalComputer = restTemplate.getForEntity(REST_URL + "/pcs/" + id, PersonalComputer.class).getBody();
         model.addAttribute("personalComputer", personalComputer);
         return "system";
@@ -66,7 +73,7 @@ public class SystemsWebController {
     // Controller for calling REST when "SAVE PC" button clicked on EDIT page
     @PostMapping(value = "/systems/{id}")
     public final String editSystem(PersonalComputer personalComputer) {
-        System.out.println("Editing pc: " + personalComputer.toString());
+        logger.info("Editing pc: " + personalComputer.toString());
         restTemplate.put(REST_URL + "/pcs", personalComputer, PersonalComputer.class);
         return "redirect:/systems";
     }
@@ -76,7 +83,7 @@ public class SystemsWebController {
     public final void deleteSystem(@PathVariable Integer id) {
         //Map<String, String> params = new HashMap<>();
         //params.put("id", id.toString());   <-- if REST deletes via REQUESTPARAM
-        System.out.println("Deleting pc with id: " + id);
+        logger.info("Deleting pc with id: " + id);
         restTemplate.delete(REST_URL + "/" + id + "/delete");
     }
 
@@ -101,7 +108,7 @@ public class SystemsWebController {
     // test
     @PostMapping(value = "/systemstest")
     public final String testSystem(String test2, Model model) {
-        System.out.println("String test22: " + test2);
+        logger.info("String test22: " + test2);
         return "redirect:/systems";
     }
 
