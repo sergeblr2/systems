@@ -30,6 +30,7 @@
 		<module>rest-app</module>
 		<module>dao</module>
 		<module>web-app</module>
+		<module>static-site</module>
 	</modules>
 
 	<dependencyManagement>
@@ -125,6 +126,25 @@
 						<compilerArgument>
 							-proc:none
 						</compilerArgument>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.3.0</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<formats>
+							<format>tar</format>
+						</formats>
+						<descriptorSourceDirectory>src/descriptor</descriptorSourceDirectory>
 					</configuration>
 				</plugin>
 			</plugins>

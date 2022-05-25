@@ -1,0 +1,21 @@
+<assembly>
+    <id>static-id</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/site</directory>
+            <outputDirectory>static-site</outputDirectory>
+            <includes>
+                <include>*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../web-app/src/main/resources</directory>
+            <outputDirectory>web-app-resources</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+</assembly>
