@@ -6,7 +6,7 @@
             <directory>src/site</directory>
             <outputDirectory>static-site</outputDirectory>
             <includes>
-                <include>*</include>
+                <include>**/*</include>
             </includes>
         </fileSet>
         <fileSet>
