@@ -26,7 +26,7 @@ public class SystemsRestController {
 
     @GetMapping("/version")
     public String getRestApPVersion() {
-        return "rest-app-1.14";
+        return "rest-app-1.17";
     }
 
     @GetMapping("{id}")
