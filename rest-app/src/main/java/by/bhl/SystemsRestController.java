@@ -24,6 +24,11 @@ public class SystemsRestController {
         return (List<PersonalComputer>) repository.findAll();
     }
 
+    @GetMapping("/version")
+    public String getRestApPVersion() {
+        return "rest-app-1.14";
+    }
+
     @GetMapping("{id}")
     public Optional<PersonalComputer> findPersonalComputerById(@PathVariable("id") Long id) {
         return repository.findById(id);
