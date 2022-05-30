@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest/pcs")
+@RequestMapping("/pcs")
 public class SystemsRestController {
 
     Logger logger = LoggerFactory.getLogger(SystemsRestController.class);
