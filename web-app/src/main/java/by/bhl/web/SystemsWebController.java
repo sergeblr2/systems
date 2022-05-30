@@ -17,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +41,7 @@ public class SystemsWebController {
     public final String listAllPcs(Model model) {
         logger.info("Getting all pcs");
         model.addAttribute("personalComputers",
-                restTemplate.getForObject(REST_URL + "/pcs", List.class));
+                restTemplate.getForObject(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/pcs", List.class));
         //model.addAttribute("test2", "j");
         return "systems";
     }
@@ -57,7 +59,7 @@ public class SystemsWebController {
     @PostMapping(value = "/system")
     public final String addSystem(PersonalComputer personalComputer) {
         logger.info("Adding pc: " + personalComputer.toString());
-        restTemplate.postForEntity(REST_URL + "/pcs", personalComputer, PersonalComputer.class);
+        restTemplate.postForEntity(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/pcs", personalComputer, PersonalComputer.class);
         return "redirect:/systems";
     }
 
@@ -65,7 +67,7 @@ public class SystemsWebController {
     @GetMapping(value = "/systems/{id}")
     public final String gotoEditPCPage(@PathVariable Integer id, Model model) {
         logger.info("Loading PC editing page");
-        PersonalComputer personalComputer = restTemplate.getForEntity(REST_URL + "/pcs/" + id, PersonalComputer.class).getBody();
+        PersonalComputer personalComputer = restTemplate.getForEntity(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/pcs/" + id, PersonalComputer.class).getBody();
         model.addAttribute("personalComputer", personalComputer);
         return "system";
     }
@@ -74,7 +76,7 @@ public class SystemsWebController {
     @PostMapping(value = "/systems/{id}")
     public final String editSystem(PersonalComputer personalComputer) {
         logger.info("Editing pc: " + personalComputer.toString());
-        restTemplate.put(REST_URL + "/pcs", personalComputer, PersonalComputer.class);
+        restTemplate.put(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/pcs", personalComputer, PersonalComputer.class);
         return "redirect:/systems";
     }
 
@@ -84,7 +86,7 @@ public class SystemsWebController {
         //Map<String, String> params = new HashMap<>();
         //params.put("id", id.toString());   <-- if REST deletes via REQUESTPARAM
         logger.info("Deleting pc with id: " + id);
-        restTemplate.delete(REST_URL + "/" + id + "/delete");
+        restTemplate.delete(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/" + id + "/delete");
     }
 
 
@@ -94,7 +96,7 @@ public class SystemsWebController {
         String filename = "systems.xlsx";
         ObjectMapper mapper = new ObjectMapper();
 
-        JsonNode pcsNode = restTemplate.getForObject(REST_URL + "/pcs", JsonNode.class);
+        JsonNode pcsNode = restTemplate.getForObject(ServletUriComponentsBuilder.fromCurrentRequestUri() + REST_URL + "/pcs", JsonNode.class);
         List<PersonalComputer> pcs = mapper.convertValue(pcsNode, new TypeReference<List<PersonalComputer>>(){});
         ByteArrayInputStream in = ExcelHelper.pcsToExcel(pcs);
 
