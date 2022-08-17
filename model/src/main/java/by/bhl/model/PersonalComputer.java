@@ -47,6 +47,11 @@ public class PersonalComputer {
     }
 
     public void setLevel(Integer level) {
+        if(level < 0) {
+            level = 0;
+        } else if (level > 100) {
+            level = 100;
+        }
         this.level = level;
     }
 
