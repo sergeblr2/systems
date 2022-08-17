@@ -117,8 +117,9 @@ public class SystemsWebController {
     }
 
     public String getBaseUrl() {
-        return ServletUriComponentsBuilder.fromCurrentServletMapping().build().toString().
-                replace(ServletUriComponentsBuilder.fromCurrentContextPath().build().getPath().toString(),"");
+        return "http://localhost:8080";
+        //return ServletUriComponentsBuilder.fromCurrentServletMapping().build().toString().
+        //        replace(ServletUriComponentsBuilder.fromCurrentContextPath().build().getPath().toString(),"");
     }
 
     // TODO: Add PUT, DELETE and GET by id, contains, etc mappings
