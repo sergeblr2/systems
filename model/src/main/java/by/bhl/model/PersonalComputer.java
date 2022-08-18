@@ -14,7 +14,7 @@ public class PersonalComputer {
     Long id;
     String name;
     Integer level;
-    Byte status;
+    String status;
 
     public Long getId() {
         return id;
@@ -24,7 +24,7 @@ public class PersonalComputer {
 
     }
 
-    public PersonalComputer(String name, Integer level, Byte status) {
+    public PersonalComputer(String name, Integer level, String status) {
         this.name = name;
         this.level = level;
         this.status = status;
@@ -55,11 +55,11 @@ public class PersonalComputer {
         this.level = level;
     }
 
-    public Byte getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

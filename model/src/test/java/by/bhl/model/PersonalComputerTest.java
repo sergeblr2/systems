@@ -13,7 +13,7 @@ public class PersonalComputerTest
         personalComputer.setId(0l);
         personalComputer.setName("");
         personalComputer.setLevel(0);
-        personalComputer.setStatus((byte)0);
+        personalComputer.setStatus("0");
     }
 
     @Test
