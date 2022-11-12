@@ -31,7 +31,8 @@
 		<module>dao</module>
 		<module>web-app</module>
 		<module>static-site</module>
-	</modules>
+        <module>web-app-ng</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
